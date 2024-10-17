@@ -1,0 +1,42 @@
+/* Copyright 2024 Toyota Motor Corporation. All rights reserved. */
+
+/* Container to arrange logos horizontally */
+.affiliations-logos {
+    display: flex;
+    justify-content: center; /* Center the logos horizontally */
+    align-items: center; /* Add vertical centering */
+    gap: 40px; /* Space between logos */
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Style for logo images */
+.affiliation-logo-img {
+    max-height: 120px;
+    height: auto;
+    width: auto;
+}
+
+/* Container to arrange affiliation texts horizontally */
+.affiliations-texts {
+    display: flex;
+    justify-content: center; /* Center the text horizontally */
+    align-items: center; /* Add vertical centering */
+    gap: 40px; /* Space between texts */
+    margin-bottom: 20px;
+}
+
+/* Style for affiliation texts */
+.affiliation-text {
+    text-align: center; /* Center the text */
+    font-size: 1em; /* Adjust font size */
+}
+
+/* Responsive design: when screen width is 600px or less */
+@media (max-width: 600px) {
+    .affiliations-logos, .affiliations-texts {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+}

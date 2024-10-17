@@ -1,0 +1,700 @@
+<!-- 
+ This source code is derived from DiffusionNOCS (https://github.com/woven-planet/DiffusionNOCS/tree/gh-pages)
+ Copyright 2024 Toyota Motor Corporation.  All rights reserved. 
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<script src="bootstrap.js"></script>
+<script type="text/javascript" charset="utf-8"
+    src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+
+<style type="text/css">
+    body {
+        font-family: "Titillium Web", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        font-weight: 300;
+        font-size: 17px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @media screen and (min-width: 980px) {
+        body {
+            width: 980px;
+        }
+    }
+
+
+    h1 {
+        font-weight: 300;
+        line-height: 1.15em;
+    }
+
+    h2 {
+        font-size: 1.75em;
+    }
+
+    a:link,
+    a:visited {
+        color: #1468b7;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #208799;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    h2,
+    h3 {
+        text-align: left;
+    }
+
+    h1 {
+        font-size: 40px;
+        font-weight: 500;
+    }
+
+    h2 {
+        font-weight: 400;
+        margin: 16px 0px 4px 0px;
+    }
+
+    h3 {
+        font-weight: 600;
+        margin: 16px 0px 4px 0px;
+    }
+
+    .paper-title {
+        padding: 1px 0px 1px 0px;
+    }
+
+    section {
+        margin: 32px 0px 32px 0px;
+        text-align: justify;
+        clear: both;
+    }
+
+    .col-5 {
+        width: 20%;
+        float: left;
+    }
+
+    .move-down {
+        margin-top: 0.6cm;
+    }
+
+    .col-4 {
+        width: 25%;
+        float: left;
+    }
+
+    .col-3 {
+        width: 33%;
+        float: left;
+    }
+
+    .col-2 {
+        width: 50%;
+        float: left;
+    }
+
+    .col-1 {
+        width: 100%;
+        float: left;
+    }
+
+    .col-8 {
+        width: 12.5%;
+    }
+
+    .author-row,
+    .affil-row {
+        font-size: 26px;
+    }
+
+    .author-row-new {
+        text-align: center;
+    }
+
+    .author-row-new a {
+        display: inline-block;
+        font-size: 20px;
+        padding: 4px;
+    }
+
+    .author-row-new sup {
+        color: #313436;
+        font-size: 12px;
+    }
+
+    .affiliations-new {
+        font-size: 18px;
+        text-align: center;
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+
+    .row {
+        margin: 16px 0px 16px 0px;
+    }
+
+    .authors {
+        font-size: 26px;
+    }
+
+    .affiliatons {
+        font-size: 18px;
+    }
+
+    .affil-row {
+        margin-top: 18px;
+    }
+
+    .teaser {
+        max-width: 100%;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .screenshot {
+        width: 256px;
+        border: 1px solid #ddd;
+    }
+
+    .screenshot-el {
+        margin-bottom: 16px;
+    }
+
+    hr {
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #ddd;
+        margin: 0;
+    }
+
+    .material-icons {
+        vertical-align: -6px;
+    }
+
+    p {
+        line-height: 1.25em;
+    }
+
+    .caption {
+        font-size: 16px;
+        color: #666;
+        margin-top: 4px;
+        margin-bottom: 10px;
+        text-align: left;
+    }
+
+
+    video {
+        display: block;
+        margin: auto;
+    }
+
+
+    figure {
+        display: block;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    #bibtex pre {
+        font-size: 14px;
+        background-color: #eee;
+        padding: 16px;
+    }
+
+    .blue {
+        color: #2c82c9;
+        font-weight: bold;
+    }
+
+    .orange {
+        color: #d35400;
+        font-weight: bold;
+    }
+
+    .flex-row {
+        display: flex;
+        flex-flow: row wrap;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .paper-btn-coming-soon {
+        position: relative;
+        text-align: center;
+
+        display: inline-block;
+        margin: 8px;
+        padding: 8px 8px;
+
+        border-width: 0;
+        outline: none;
+        border-radius: 15px;
+
+        background-color: #838383;
+        color: white !important;
+        font-size: 20px;
+        width: 100px;
+        font-weight: 200;
+    }
+
+    .coming-soon {
+        position: absolute;
+        top: -15px;
+        right: -15px;
+    }
+
+    .center {
+        margin-left: 10.0%;
+        margin-right: 10.0%;
+    }
+
+    .paper-btn {
+        position: relative;
+        text-align: center;
+
+        display: inline-block;
+        margin: 8px;
+        padding: 8px 8px;
+
+        border-width: 0;
+        outline: none;
+        border-radius: 15px;
+
+        background-color: #3e3131;
+        color: white !important;
+        font-size: 20px;
+        width: 100px;
+        font-weight: 200;
+    }
+
+    .paper-btn-parent {
+        display: flex;
+        justify-content: center;
+        margin: 16px 0px;
+    }
+
+    .paper-btn:hover {
+        opacity: 0.85;
+    }
+
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .venue {
+        font-size: 23px;
+    }
+
+    .topnav {
+        background-color: #EEEEEE;
+        overflow: hidden;
+    }
+
+    .topnav div {
+        max-width: 1070px;
+        margin: 0 auto;
+    }
+
+    .topnav a {
+        display: inline-block;
+        color: black;
+        text-align: center;
+        vertical-align: middle;
+        padding: 16px 16px;
+        text-decoration: none;
+        font-size: 18px;
+    }
+
+    .topnav img {
+        padding: 2px 0px;
+        width: 100%;
+        margin: 0.2em 0px 0.3em 0px;
+        vertical-align: middle;
+    }
+
+    pre {
+        font-size: 0.9em;
+        padding-left: 7px;
+        padding-right: 7px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        border-radius: 3px;
+        background-color: rgb(235, 235, 235);
+        overflow-x: auto;
+    }
+
+    .download-thumb {
+        display: flex;
+    }
+
+    @media only screen and (max-width: 620px) {
+        .download-thumb {
+            display: none;
+        }
+    }
+
+    .paper-stuff {
+        width: 50%;
+        font-size: 20px;
+    }
+
+    @media only screen and (max-width: 620px) {
+        .paper-stuff {
+            width: 100%;
+        }
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .column {
+        text-align: center;
+        float: left;
+        width: 16.666%;
+        padding: 5px;
+    }
+
+    .column3 {
+        text-align: center;
+        float: left;
+        width: 33.333%;
+        padding: 5px;
+    }
+
+    .column4 {
+        text-align: center;
+        float: left;
+        width: 50%;
+        padding: 5px;
+    }
+
+    .column5 {
+        text-align: center;
+        float: left;
+        width: 20%;
+        padding: 5px;
+    }
+
+    .column10 {
+        text-align: center;
+        float: left;
+        width: 10%;
+        padding: 5px;
+    }
+
+    .border-right {
+        border-right: 1px solid black;
+    }
+
+    .border-bottom {
+        border-bottom: 1px solid black;
+    }
+
+
+    .row-center {
+        margin: 16px 0px 16px 0px;
+        text-align: center;
+    }
+
+    /* Clearfix (clear floats) */
+    .row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .figure-img {
+        margin-bottom: 0.5rem;
+        line-height: 1;
+    }
+
+
+
+
+
+
+
+
+    .rounded-circle {
+        border-radius: 50% !important;
+    }
+
+
+
+
+
+
+    /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 500px) {
+        .column {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        .column3 {
+            width: 100%;
+        }
+    }
+</style>
+<link rel="stylesheet" href="bootstrap-grid.css">
+<link rel="stylesheet" href="simplegrid.css">
+<!-- Custom CSS for aligning the long- and short-named affiliations horizontally -->
+<link rel="stylesheet" href="affiliations-container.css">
+
+<script type="text/javascript" src="../js/hidebib.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,600,400italic,600italic,300,300italic'
+    rel='stylesheet' type='text/css'>
+
+<head>
+    <title> Self-Supervised Geometry-Guided Initialization for Robust Monocular Visual Odometry
+    </title>
+    <link rel="icon" href="img/X_icon_tokureiban_1.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Robust visual odometry leveraging the learned zero-shot SLAM backbone" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:title"
+        content="Self-Supervised Geometry-Guided Initialization for Robust Monocular Visual Odometry">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="paper-title">
+            <h1>
+                Self-Supervised Geometry-Guided Initialization for Robust Monocular Visual Odometry
+        </div>
+
+        <div id="authors">
+            <center>
+                <div class="author-row-new">
+                    <a href="https://www.linkedin.com/in/takayuki-kanai-342a38236/">Takayuki Kanai<sup>1</sup></a>,
+                    <a href="https://www.linkedin.com/in/igor-vasiljevic-9ba0a951/">Igor Vasiljevic<sup>2</sup></a>,
+                    <a href="https://www.linkedin.com/in/vitorguizilini/">Vitor Guizilini<sup>2</sup></a>,
+                    and <a href="https://ieeexplore.ieee.org/author/952633458310189">Kazuhiro Shintani<sup>1</sup></a>
+                </div>
+            </center>
+            <center>
+                <!-- Aligning affiliation text horizontally -->
+                <div class="affiliations-texts">
+                    <span class="affiliation-text"><sup>1</sup> Frontier Research Center,<br> Toyota Motor
+                        Corporation</span>
+                    <span class="affiliation-text"><sup>2</sup> Toyota Research Institute</span>
+                </div>
+
+                <!-- Aligning logo image horizontally -->
+                <div class="affiliations-logos">
+                    <a href="https://global.toyota/en/mobility/frontier-research/" target="_blank">
+                        <img src="img/frc-logo-tate.png" alt="FRC Logo" class="affiliation-logo-img">
+                    </a>
+                    <a href="https://www.tri.global/" target="_blank">
+                        <img src="img/tri-logo-tate.png" alt="TRI Logo" class="affiliation-logo-img">
+                    </a>
+                </div>
+
+                <div class="caption, centered">
+                    <p>
+                        <b>The code will be made available soon.</b> <br> (Posted on December 2024)
+                    </p>
+                </div>
+
+            </center>
+
+            <div style="clear: both">
+                <div class="paper-btn-parent">
+                    <!-- Paper link -->
+                    <a class="paper-btn" href="https://arxiv.org/abs/2406.00929v1">
+                        <span class="material-icons"> feed </span>
+                        Paper
+                    </a>
+                    <!-- Dummy code link to jump nowhere-->
+                    <a class="paper-btn disabled" style="pointer-events: none; opacity: 0.5;">
+                        <span class="material-icons"> code </span>
+                        Code
+                    </a>
+                    <!-- Code link -->
+                    <!-- <a class="paper-btn" href="https://github.com/Toyota/SGInit-VO">
+                         <span class="material-icons"> code </span>
+                         Code
+                     </a> -->
+                </div>
+            </div>
+        </div>
+
+        <section id="teaser-image">
+            <center>
+                <figure>
+                    <video class="centered" width="85%" autoplay loop muted playsinline class="video-background ">
+                        <source src="img/teaser_small.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p class="caption, centered">
+                        We propose <b>SG-Init</b>: simple yet effective guides for the learned SLAM optimization.
+                    </p>
+                </figure>
+            </center>
+        </section>
+
+        <section id="abstract" />
+        <h2>Abstract</h2>
+        <hr>
+        <div class="flex-row">
+            <p>
+                Monocular visual odometry is a key technology in
+                a wide variety of autonomous systems. Relative to traditional
+                feature-based methods, that suffer from failures due to poor
+                lighting, insufficient texture, large motions, etc., recent learningbased SLAM methods exploit iterative
+                dense bundle adjustment
+                to address such failure cases and achieve robust accurate
+                localization in a wide variety of real environments, without
+                depending on domain-specific training data. However, despite
+                its potential, learning-based SLAM still struggles with scenarios
+                involving large motion and object dynamics. In this paper, we
+                diagnose key weaknesses in a popular learning-based SLAM
+                model (DROID-SLAM) by analyzing major failure cases on
+                outdoor benchmarks and exposing various shortcomings of its
+                optimization process. We then propose the use of self-supervised
+                priors leveraging a frozen large-scale pre-trained monocular
+                depth estimation to initialize the dense bundle adjustment
+                process, leading to robust visual odometry without the need
+                to fine-tune the SLAM backbone. Despite its simplicity, our
+                proposed method demonstrates significant improvements on
+                KITTI odometry, as well as the challenging DDAD benchmark.
+            </p>
+        </div>
+        </section>
+
+
+        <div class="section">
+            <h2>Method</h2>
+            <hr>
+            <p> A simpler but principled way to robustify visual odometry.</p>
+            <div class="row align-items-center">
+                <div class="col justify-content-center text-center">
+                    <video width="85%" playsinline="" autoplay="" loop="" preload="" muted="">
+                        <source src="img/method_small.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="section">
+            <h2>Vulnerability Analysis</h2>
+            <hr>
+            <p> Our proposal is founded on the comprehensive analysis of <i> de facto standard </i> approach. </p>
+            <div class="row align-items-center">
+                <div class="col justify-content-center text-center">
+                    <video width="85%" playsinline="" autoplay="" loop="" preload="" muted="">
+                        <source src="img/vulnerability_small.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+        <br>
+
+
+        <div class="section">
+            <h2>Our Related Projects</h2>
+            <hr>
+            <div class='row vspace-top'>
+                <div class="col-sm-3">
+                    <img src='img/related/teaser_white_back_v2_sesc.png' class='img-fluid'>
+                </div>
+
+                <div class="col">
+                    <div class='paper-title'>
+                        <a href="https://sites.google.com/view/tri-sesc"> Robust Self-Supervised Extrinsic
+                            Self-Calibration</a> [<a href='https://github.com/TRI-ML/vidar'>code</a>]
+                    </div>
+                    <div>
+                        We introduce <b>SESC</b>, a novel method for extrinsic calibration that builds
+                        upon the
+                        principles of self-supervised monocular depth and ego-motion learning.
+                        <b>Without manual camera calibration or 3D sensors like LiDAR</b>, our proposed curriculum
+                        scheduling
+                        facilitates joint depth, ego-motion, and extrinsics learning.
+                    </div>
+                </div>
+            </div>
+
+            <div class='row vspace-top'>
+                <div class="col-sm-3">
+                    <img src='img/related/tri-zerodepth-teaser.png' class='img-fluid'>
+                </div>
+
+                <div class="col">
+                    <div class='paper-title'>
+                        <a href="https://sites.google.com/view/tri-zerodepth"> Towards Zero-Shot Scale-Aware
+                            Monocular Depth Estimation</a> [<a href='https://github.com/TRI-ML/vidar'>code</a>]
+                    </div>
+                    <div>
+                        We introduce <b>ZeroDepth</b>, a novel variational monocular depth estimation framework capable
+                        of <b>transferring metrically accurate predictions</b> across datasets with different camera
+                        geometries.
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- <hr> -->
+
+            <section id="bibtex">
+                <h2>Citation</h2>
+                <hr>
+                <pre><code>@article{frc-tri-sginit,
+        title={Self-Supervised Geometry-Guided Initialization for Robust Monocular Visual Odometry}, 
+        author={Takayuki Kanai and Igor Vasiljevic and Vitor Guizilini and Kazuhiro Shintani},
+        year={2024},
+        journal={arXiv},
+        }</code></pre>
+            </section>
+        </div>
+
+        <div class="section">
+            <h2>Notification</h2>
+            <hr>
+            <p> The project page was solely developed for and published as part of the publication, titled
+                ``<i>Self-Supervised Geometry-Guided Initialization for Robust Monocular Visual Odometry</i>'' for its
+                visualization.
+                We do not ensure the future maintenance and monitoring of this page.</p>
+            <p> Contents might be updated or deleted without notice regarding the original manuscript update and policy
+                change. </p>
+            <p>This webpage template was adapted from <a
+                    href='https://woven-planet.github.io/DiffusionNOCS/'>DiffusionNOCS</a> -- we thank Takuya Ikeda for
+                additional support and making their source available.</p>
+        </div>
+    </div>
+
+</body>
+
+</html>
